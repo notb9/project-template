@@ -28,7 +28,7 @@ For debugging the following facilities are provided:
 
 To build the project and start debugging inside windbg select `Tasks: Run Test Task` via `CTRL + p` (consider creating a shortcut).
 
-> [!WARNING] Switching between debug and release mode
+> [!WARNING]
 > Make sure to run `make clean` or the `Clean` task when swapping between release and debug builds.
 > The debugging facilities use preprocessor macro's for conditional compiling!
 
@@ -45,7 +45,7 @@ You must have the following installed inside WSL2 for the template to work:
   - clang-format
   - make
 
-> [!NOTE] LLVM / Clang version
+> [!NOTE]
 > LLVM version 19 is not a hard requirement. Is was chosen as it supports forwarding exports by ordinal  `ld.lld-19`.
 > View syntax [on MSDN](https://learn.microsoft.com/en-us/cpp/build/reference/exports?view=msvc-170)
 
