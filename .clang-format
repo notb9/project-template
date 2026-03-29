@@ -1,0 +1,24 @@
+BasedOnStyle: Microsoft
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+
+AlignConsecutiveDeclarations: true
+AlignConsecutiveAssignments: true
+AlignOperands: true
+
+BreakBeforeBraces: Allman
+SpaceBeforeParens: ControlStatements
+SpacesInParentheses: true
+SpacesInSquareBrackets: true
+NamespaceIndentation: All
+
+BinPackArguments: false
+BinPackParameters: false
+AllowAllParametersOfDeclarationOnNextLine: false
+AllowAllArgumentsOnNextLine: false
+AlignAfterOpenBracket: BlockIndent
+
+PointerAlignment: Left
+ColumnLimit: 120
+SortIncludes: true
