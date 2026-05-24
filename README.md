@@ -8,15 +8,16 @@ The template provides the following:
   - Formatting through clang-format
   - Pre-configured .vscode directory
   - Debug print facilities
+  - Removal of unused code (the release build produces `dist/template.map` to inspect what code was included)
 
 ## Usage
-A Makefile is used for compiling and starting windbg. Make sure your project lives on your `C:` drive, WSL can also read this.
+This template uses a Makfile for building your project and debugging it with WinDbg. Your project can  live either on your C: drive or inside WSL2, but you must be running vscode from inside WSL2.
 ```bash
 # To produce a debugable build
 make <dll|exe>-debug
 
 # To start a debugable exe in windbg
-make windbg
+make exe-windbg
 
 # To produce an optimized release build
 make <dll|exe>-release
@@ -44,6 +45,10 @@ You must have the following installed inside WSL2 for the template to work:
   - lld-19
   - clang-format
   - make
+
+If you want to build inside docker rather than WSL2. Then you still need to have the following installed on WSL2:
+  - make (for running the Makefile)
+  - mingw-w64 (for autocompletion)
 
 > [!NOTE]
 > LLVM version 19 is not a hard requirement. Is was chosen as it supports forwarding exports by ordinal  `ld.lld-19`.

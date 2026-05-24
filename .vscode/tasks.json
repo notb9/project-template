@@ -31,7 +31,7 @@
       "command": "make exe-windbg",
       "group": "test",
       "dependsOn": [
-        "Build Debug"
+        "Build Debug (EXE)"
       ]
     }
   ]
