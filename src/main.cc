@@ -2,11 +2,15 @@
 
 #include "debug.h"
 
+HMODULE module_handle;
+
 extern "C" int ExeMain()
 {
     const wchar_t* msg;
     int            argc = 0;
     wchar_t**      argv = CommandLineToArgvW( GetCommandLineW(), &argc );
+
+    module_handle = nullptr;
 
     dbg_printf( "Received %d arguments\n", argc );
 
@@ -22,12 +26,13 @@ extern "C" int ExeMain()
     return 0;
 }
 
-BOOL WINAPI DllMain( [[maybe_unused]] HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved )
+BOOL WINAPI DllMain( HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved )
 {
     switch ( fdwReason )
     {
     case DLL_PROCESS_ATTACH:
-        dbg_printf( "Dll is loaded at: 0x%p\n", hinstDLL );
+        module_handle = hinstDLL;
+        dbg_printf( "Dll is loaded at: 0x%p\n", module_handle );
         break;
 
     case DLL_THREAD_ATTACH:

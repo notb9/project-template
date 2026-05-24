@@ -2,7 +2,7 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Build Debug",
+      "label": "Build Debug (EXE)",
       "type": "shell",
       "command": "make exe-debug",
       "group": "build"
@@ -26,9 +26,9 @@
       "group": "build"
     },
     {
-      "label": "Run Windbg",
+      "label": "Run Windbg (EXE)",
       "type": "shell",
-      "command": "make windbg",
+      "command": "make exe-windbg",
       "group": "test",
       "dependsOn": [
         "Build Debug"

@@ -26,7 +26,7 @@ For debugging the following facilities are provided:
   - `dbg_printf`: Prints a format string to the WinDbg console.
   - `dbg_panic`: Prints a format string to the WinDbg console and then triggers a breakpoint.
 
-To build the project and start debugging inside windbg select `Tasks: Run Test Task` via `CTRL + p` (consider creating a shortcut).
+To build the project and start debugging inside windbg select `Tasks: Run Test Task` via `CTRL + SHIFT + p` (consider creating a shortcut).
 
 > [!WARNING]
 > Make sure to run `make clean` or the `Clean` task when swapping between release and debug builds.
