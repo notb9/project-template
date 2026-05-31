@@ -41,18 +41,23 @@ SRC       := $(wildcard $(SRC_DIR)/*.cc)
 OBJ       := $(patsubst $(SRC_DIR)/%.cc,$(OBJ_DIR)/%.o,$(SRC))
 
 # Translate paths between WSL and Windows filesystem
+WIN_DRIVE := Y
 WIN_DIR   := $(shell wslpath -w '$(CURDIR)')
 WIN_EXE   := $(shell wslpath -w '$(CURDIR)/$(OUTPUT).exe')
 WIN_DLL   := $(shell wslpath -w '$(CURDIR)/$(OUTPUT).dll')
 
 exe-windbg:
+	@powershell.exe -c 'subst.exe $(WIN_DRIVE): $(WIN_DIR)'
 	/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -c 'windbgx -lsrcpath "$(WIN_DIR)\$(SRC_DIR); $(WIN_DIR)\include" -y "srv*C:\symbols*https://msdl.microsoft.com/download/symbols" -c "bp $(PROJECT_NAME)!ExeMain; g" $(WIN_EXE)'
+	@powershell.exe -c 'subst.exe /D $(WIN_DRIVE):'
 
 dll-windbg:
+	@powershell.exe -c 'subst.exe $(WIN_DRIVE): $(WIN_DIR)'
 	/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -c 'windbgx -lsrcpath "$(WIN_DIR)\$(SRC_DIR); $(WIN_DIR)\include" -y "srv*C:\symbols*https://msdl.microsoft.com/download/symbols" -c "bp $(PROJECT_NAME)!_ExecPayload; g" C:\Windows\System32\rundll32.exe $(WIN_DLL),EntryFunc'
+	@powershell.exe -c 'subst.exe /D $(WIN_DRIVE):'
 
 # Generate PDB for debugging inside WinDbg
-%-debug: CXXFLAGS += -g -gcodeview -O0 -DDEBUG
+%-debug: CXXFLAGS += -g -gcodeview -O0 -DDEBUG -ffile-prefix-map=$(CURDIR)=$(WIN_DRIVE):/
 %-debug: LDFLAGS  += -Wl,/debug -Wl,/pdb:$(OUTPUT).pdb
 %-debug: %
 	@true

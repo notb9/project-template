@@ -11,7 +11,11 @@ The template provides the following:
   - Removal of unused code (the release build produces `dist/template.map` to inspect what code was included)
 
 ## Usage
-This template uses a Makfile for building your project and debugging it with WinDbg. Your project can  live either on your C: drive or inside WSL2, but you must be running vscode from inside WSL2.
+This template uses a Makfile for building your project and debugging it with WinDbg. Your project can  live either on your `C:` drive or inside WSL2, but you must be running vscode from inside WSL2.
+
+> [!IMPORTANT]
+> In order to be able to place breakpoints inside the source code view in windbg, the paths in the PDB must match with what windbg is expecting. To this end, `subst.exe` is used to map the WSL folder unto the `Y` drive letter. Ensure you change the `WIN_DRIVE` variable in the Makefile if you are already using it.
+
 ```bash
 # To produce a debugable build
 make <dll|exe>-debug
@@ -29,7 +33,7 @@ For debugging the following facilities are provided:
 
 To build the project and start debugging inside windbg select `Tasks: Run Test Task` via `CTRL + SHIFT + p` (consider creating a shortcut).
 
-> [!WARNING]
+> [!IMPORTANT]
 > Make sure to run `make clean` or the `Clean` task when swapping between release and debug builds.
 > The debugging facilities use preprocessor macro's for conditional compiling!
 
